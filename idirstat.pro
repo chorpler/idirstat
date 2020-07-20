@@ -25,7 +25,7 @@ major_is_less_5 = $$find(QT_MAJOR_VERSION, [234])
 
 
 TARGET		 = idirstat
-TARGET.files	 = idirstat
+TARGET.files	 = idirstat/src
 TARGET.path	 = /usr/bin
 INSTALLS	+= TARGET desktop icons
 
