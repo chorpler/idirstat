@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=iDirStat
+Exec=iDirStat %u
+Icon=WinDirStat
+GenericName=iDirStat Directory Statistics
+Terminal=false
+MimeType=inode/directory;inode/mount-point;
+Categories=Qt;System;Filesystem;

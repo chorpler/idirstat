@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>Stefan Hundhammer</author>
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1157</width>
+    <height>650</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>iDirStat v1.0a (tobias@familie-feigl.de - iDirStat@ Stefan.Hundhammer@gmx.de &amp; kdirstat@ http://kdirstat.sourceforge.net)</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/icons/idirstat.png</normaloff>:/icons/idirstat.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QSplitter" name="mainWinSplitter">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <widget class="iDirStat::DirTreeView" name="dirTreeView"/>
+      <widget class="iDirStat::TreemapView" name="treemapView"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1157</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="actionNewWindow"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionRefreshAll"/>
+    <addaction name="actionRefreshSelected"/>
+    <addaction name="separator"/>
+    <addaction name="actionReadExcludedDirectory"/>
+    <addaction name="actionContinueReadingAtMountPoint"/>
+    <addaction name="actionStopReading"/>
+    <addaction name="separator"/>
+    <addaction name="actionAskWriteCache"/>
+    <addaction name="actionAskReadCache"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>&amp;View</string>
+    </property>
+    <widget class="QMenu" name="menuExpandTreeToLevel">
+     <property name="title">
+      <string>E&amp;xpand Tree To Level</string>
+     </property>
+     <addaction name="actionExpandTreeLevel0"/>
+     <addaction name="actionExpandTreeLevel1"/>
+     <addaction name="actionExpandTreeLevel2"/>
+     <addaction name="actionExpandTreeLevel3"/>
+     <addaction name="actionExpandTreeLevel4"/>
+     <addaction name="actionExpandTreeLevel5"/>
+     <addaction name="actionExpandTreeLevel6"/>
+     <addaction name="actionExpandTreeLevel7"/>
+     <addaction name="actionExpandTreeLevel8"/>
+     <addaction name="actionExpandTreeLevel9"/>
+    </widget>
+    <addaction name="actionCloseAllTreeLevels"/>
+    <addaction name="menuExpandTreeToLevel"/>
+    <addaction name="separator"/>
+    <addaction name="actionFileSizeStats"/>
+    <addaction name="actionFileTypeStats"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="actionCopyUrlToClipboard"/>
+    <addaction name="actionMoveToTrash"/>
+   </widget>
+   <widget class="QMenu" name="menuTreemap">
+    <property name="title">
+     <string>Tree&amp;map</string>
+    </property>
+    <addaction name="actionShowTreemap"/>
+    <addaction name="actionTreemapAsSidePanel"/>
+    <addaction name="separator"/>
+    <addaction name="actionTreemapZoomIn"/>
+    <addaction name="actionTreemapZoomOut"/>
+    <addaction name="actionResetTreemapZoom"/>
+    <addaction name="actionTreemapRebuild"/>
+   </widget>
+   <widget class="QMenu" name="menuGoTo">
+    <property name="title">
+     <string>&amp;Go To</string>
+    </property>
+    <addaction name="actionGoUp"/>
+    <addaction name="actionGoToToplevel"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="actionAbout"/>
+    <addaction name="actionAboutQt"/>
+   </widget>
+   <widget class="QMenu" name="menuCleanup">
+    <property name="tearOffEnabled">
+     <bool>true</bool>
+    </property>
+    <property name="title">
+     <string>&amp;Clean Up</string>
+    </property>
+    <addaction name="actionMoveToTrash"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuSettings">
+    <property name="title">
+     <string>&amp;Settings</string>
+    </property>
+    <addaction name="actionConfigure"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuView"/>
+   <addaction name="menuGoTo"/>
+   <addaction name="menuTreemap"/>
+   <addaction name="menuCleanup"/>
+   <addaction name="menuSettings"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionGoUp"/>
+   <addaction name="actionRefreshAll"/>
+   <addaction name="separator"/>
+   <addaction name="actionTreemapZoomIn"/>
+   <addaction name="actionTreemapZoomOut"/>
+   <addaction name="actionResetTreemapZoom"/>
+   <addaction name="separator"/>
+   <addaction name="actionMoveToTrash"/>
+  </widget>
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/window-close.png</normaloff>:/icons/window-close.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit application</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/open-dir.png</normaloff>:/icons/open-dir.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Open...</string>
+   </property>
+   <property name="toolTip">
+    <string>Open a directory to scan.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionCloseAllTreeLevels">
+   <property name="text">
+    <string>&amp;Close All Tree Levels</string>
+   </property>
+   <property name="toolTip">
+    <string>Close all branches of the directory tree.</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel0">
+   <property name="text">
+    <string>Level &amp;0</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 0.</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel1">
+   <property name="text">
+    <string>Level &amp;1</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 1.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel2">
+   <property name="text">
+    <string>Level &amp;2</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 2.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+2</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel3">
+   <property name="text">
+    <string>Level &amp;3</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 3.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+3</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel4">
+   <property name="text">
+    <string>Level &amp;4</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 4.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+4</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel5">
+   <property name="text">
+    <string>Level &amp;5</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 5.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+5</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel6">
+   <property name="text">
+    <string>Level &amp;6</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 6.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+6</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel7">
+   <property name="text">
+    <string>Level &amp;7</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 7.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+7</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel8">
+   <property name="text">
+    <string>Level &amp;8</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 8.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+8</string>
+   </property>
+  </action>
+  <action name="actionExpandTreeLevel9">
+   <property name="text">
+    <string>Level &amp;9</string>
+   </property>
+   <property name="toolTip">
+    <string>Expand (open) the directory tree to level 9.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+9</string>
+   </property>
+  </action>
+  <action name="actionStopReading">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/stop.png</normaloff>:/icons/stop.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Stop Reading</string>
+   </property>
+   <property name="toolTip">
+    <string>Stop reading directories.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionAskWriteCache">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/document-export.png</normaloff>:/icons/document-export.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Write To Cache File...</string>
+   </property>
+   <property name="toolTip">
+    <string>Write the current directory tree to a cache file.</string>
+   </property>
+  </action>
+  <action name="actionAskReadCache">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/document-import.png</normaloff>:/icons/document-import.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Read Cache File...</string>
+   </property>
+   <property name="toolTip">
+    <string>Read a directory tree from a cache file.</string>
+   </property>
+  </action>
+  <action name="actionRefreshAll">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/refresh.png</normaloff>:/icons/refresh.png</iconset>
+   </property>
+   <property name="text">
+    <string>Refresh &amp;All</string>
+   </property>
+   <property name="toolTip">
+    <string>Re-read the entire directory tree from disk.</string>
+   </property>
+   <property name="shortcut">
+    <string>F5</string>
+   </property>
+  </action>
+  <action name="actionCopyUrlToClipboard">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/edit-copy.png</normaloff>:/icons/edit-copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Copy URL</string>
+   </property>
+   <property name="toolTip">
+    <string>Copy the full path of the current item to the system clipboard for use in other applications.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionTreemapZoomIn">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/zoom-in.png</normaloff>:/icons/zoom-in.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom &amp;In</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom the treemap in (enlarge) one level.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl++</string>
+   </property>
+  </action>
+  <action name="actionTreemapZoomOut">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/zoom-out.png</normaloff>:/icons/zoom-out.png</iconset>
+   </property>
+   <property name="text">
+    <string>Zoom &amp;Out</string>
+   </property>
+   <property name="toolTip">
+    <string>Zoom the treemap out one level.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+-</string>
+   </property>
+  </action>
+  <action name="actionResetTreemapZoom">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/zoom-best-fit.png</normaloff>:/icons/zoom-best-fit.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Reset Zoom</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset the treemap zoom factor to normal.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+0</string>
+   </property>
+  </action>
+  <action name="actionTreemapRebuild">
+   <property name="text">
+    <string>Re&amp;build</string>
+   </property>
+   <property name="toolTip">
+    <string>Rebuild the treemap.</string>
+   </property>
+  </action>
+  <action name="actionShowTreemap">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>&amp;Show Treemap</string>
+   </property>
+   <property name="toolTip">
+    <string>Enable or disable showing the treemap view.</string>
+   </property>
+   <property name="shortcut">
+    <string>F9</string>
+   </property>
+  </action>
+  <action name="actionGoUp">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/go-up.png</normaloff>:/icons/go-up.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Up One Level</string>
+   </property>
+   <property name="toolTip">
+    <string>Navigate one directory level up.</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+Up</string>
+   </property>
+  </action>
+  <action name="actionGoToToplevel">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/go-top.png</normaloff>:/icons/go-top.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Toplevel</string>
+   </property>
+   <property name="toolTip">
+    <string>Navigate to the toplevel directory of this tree.</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Home</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/icons/iDirStat.png</normaloff>:/icons/iDirStat.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;About iDirStat...</string>
+   </property>
+   <property name="toolTip">
+    <string>Show version, copyright and license information about this program.</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>About &amp;Qt...</string>
+   </property>
+   <property name="toolTip">
+    <string>Show information about the Qt version used for building this program.</string>
+   </property>
+  </action>
+  <action name="actionRefreshSelected">
+   <property name="text">
+    <string>Re&amp;fresh Selected</string>
+   </property>
+   <property name="toolTip">
+    <string>Reread the selected branch from disk.</string>
+   </property>
+  </action>
+  <action name="actionReadExcludedDirectory">
+   <property name="text">
+    <string>Read &amp;Excluded Directory</string>
+   </property>
+   <property name="toolTip">
+    <string>Read a directory that was excluded by an exclude rule.</string>
+   </property>
+  </action>
+  <action name="actionContinueReadingAtMountPoint">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/hard-disk.png</normaloff>:/icons/hard-disk.png</iconset>
+   </property>
+   <property name="text">
+    <string>Continue Reading at &amp;Mount Point</string>
+   </property>
+  </action>
+  <action name="actionConfigure">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/preferences.png</normaloff>:/icons/preferences.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Configure iDirStat</string>
+   </property>
+   <property name="toolTip">
+    <string>Configure iDirStat</string>
+   </property>
+  </action>
+  <action name="actionVerboseSelection">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Verbose Selection</string>
+   </property>
+   <property name="toolTip">
+    <string>Switch verbose logging of selecting and unselecting items on or off.</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+F7</string>
+   </property>
+  </action>
+  <action name="actionMoveToTrash">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/trashcan.png</normaloff>:/icons/trashcan.png</iconset>
+   </property>
+   <property name="text">
+    <string>Move to &amp;Trash</string>
+   </property>
+   <property name="toolTip">
+    <string>Move the selected items to the trash bin.</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
+  </action>
+  <action name="actionDumpSelection">
+   <property name="text">
+    <string>Dump Selection to Log</string>
+   </property>
+   <property name="shortcut">
+    <string>F7</string>
+   </property>
+  </action>
+  <action name="actionFileTypeStats">
+   <property name="text">
+    <string>File &amp;Type Statistics</string>
+   </property>
+   <property name="toolTip">
+    <string>File Type Statistics</string>
+   </property>
+   <property name="shortcut">
+    <string>F3</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>iDirStat &amp;Help</string>
+   </property>
+   <property name="toolTip">
+    <string>iDirStat Help</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionTreemapAsSidePanel">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Treemap as side panel</string>
+   </property>
+   <property name="toolTip">
+    <string>Show the Treeemap beside the directory tree, otherwise it will be shown beneath.</string>
+   </property>
+  </action>
+  <action name="actionFileSizeStats">
+   <property name="text">
+    <string>File &amp;Size Statistics</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="actionNewWindow">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/new-window.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>&amp;New Window...</string>
+   </property>
+   <property name="toolTip">
+    <string>Spawn a new window to scan another location</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+   <property name="iconVisibleInMenu">
+    <bool>false</bool>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>iDirStat::DirTreeView</class>
+   <extends>QTreeView</extends>
+   <header>DirTreeView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>iDirStat::TreemapView</class>
+   <extends>QGraphicsView</extends>
+   <header>TreemapView.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>
