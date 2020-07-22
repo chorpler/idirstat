@@ -356,7 +356,7 @@ QString iDirStat::formatSize( FileSize lSize )
 
     if ( lSize < 1024 )
     {
-	sizeString.sprintf( "%lld ", lSize );
+    sizeString.asprintf( "%lld ", lSize );
 	sizeString += units.at( unitIndex );
     }
     else
@@ -369,7 +369,7 @@ QString iDirStat::formatSize( FileSize lSize )
 	    ++unitIndex;
 	}
 
-	sizeString.sprintf( "%.1f ", size );
+    sizeString.asprintf( "%.1f ", size );
 	sizeString += units.at( unitIndex );
     }
 

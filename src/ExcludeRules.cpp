@@ -252,7 +252,7 @@ void ExcludeRules::writeSettings()
 	if ( ! regexp.pattern().isEmpty() )
 	{
 	    QString groupName;
-	    groupName.sprintf( "ExcludeRule_%02d", i+1 );
+        groupName.asprintf( "ExcludeRule_%02d", i+1 );
 	    settings.beginGroup( groupName );
 
 	    settings.setValue( "Pattern",	regexp.pattern() );

@@ -398,7 +398,7 @@ FileTypeItem::FileTypeItem( const QString & name,
     _percentage( percentage )
 {
     QString percentStr;
-    percentStr.sprintf( "%02.2f%%", percentage );
+    percentStr.asprintf( "%02.2f%%", percentage );
 
     setText( FT_NameCol,       name );
     setText( FT_CountCol,      QString( "%1" ).arg( count ) );

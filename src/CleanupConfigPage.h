@@ -109,7 +109,7 @@ namespace iDirStat
 	 *
 	 * Implemented from ListEditor.
 	 **/
-	virtual void removeValue( void * value );
+    virtual void removeValue( void * value ) override;
 
 	/**
 	 * Return a text for the list item of 'value'.

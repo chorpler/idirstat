@@ -997,7 +997,7 @@ QVariant DirTreeModel::formatPercent( float percent ) const
 	return QVariant();
 
     QString text;
-    text.sprintf( "%.1f%%", percent );
+    text.asprintf( "%.1f%%", percent );
 
     return text;
 }

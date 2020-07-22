@@ -185,29 +185,29 @@ QString CacheWriter::formatSize( FileSize size )
 
     if ( size >= TB && size % TB == 0 )
     {
-	str.sprintf( "%lldT", size / TB );
+    str.asprintf( "%lldT", size / TB );
 	return str;
     }
 
     if ( size >= GB && size % GB == 0 )
     {
-	str.sprintf( "%lldG", size / GB );
+    str.asprintf( "%lldG", size / GB );
 	return str;
     }
 
     if ( size >= MB && size % MB == 0 )
     {
-	str.sprintf( "%lldM", size / MB );
+    str.asprintf( "%lldM", size / MB );
 	return str;
     }
 
     if ( size >= KB && size % KB == 0 )
     {
-	str.sprintf( "%lldK", size / KB );
+    str.asprintf( "%lldK", size / KB );
 	return str;
     }
 
-    str.sprintf( "%lld", size );
+    str.asprintf( "%lld", size );
     return str;
 }
 

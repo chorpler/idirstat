@@ -77,7 +77,7 @@ namespace iDirStat
 	 * Returns the minimum recommended size for this widget.
 	 * Reimplemented from QWidget.
 	 **/
-	virtual QSize minimumSizeHint() const { return QSize( 0, 0 ); }
+    virtual QSize minimumSizeHint() const override { return QSize( 0, 0 ); }
 
 	/**
 	 * Returns this treemap view's current item tile or 0 if there is none.

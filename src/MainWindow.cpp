@@ -995,12 +995,12 @@ QString MainWindow::formatTime( qint64 millisec )
 
     if ( hours < 1 && min < 1 && sec < 60 )
     {
-	formattedTime.sprintf ( "%2d.%03lld ", sec, millisec );
+    formattedTime.asprintf ( "%2d.%03lld ", sec, millisec );
 	formattedTime += tr( "sec" );
     }
     else
     {
-	formattedTime.sprintf ( "%02d:%02d:%02d", hours, min, sec );
+    formattedTime.asprintf ( "%02d:%02d:%02d", hours, min, sec );
     }
 
     return formattedTime;

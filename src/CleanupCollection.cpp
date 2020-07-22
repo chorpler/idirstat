@@ -556,7 +556,7 @@ void CleanupCollection::writeSettings()
     for ( int i=0; i < _cleanupList.size(); ++i )
     {
 	QString groupName;
-	groupName.sprintf( "Cleanup_%02d", i+1 );
+    groupName.asprintf( "Cleanup_%02d", i+1 );
 	settings.beginGroup( groupName );
 
 	Cleanup * cleanup = _cleanupList.at(i);
